@@ -108,6 +108,8 @@ func (c *StackCollection) CreateStack(name string, stack builder.ResourceSet, pa
 	return nil
 }
 
+// UpdateStack will update a cloudformation stack. It uses changesets and if in debug it will log the changes.
+// This is used bu things like nodegroup scaling
 func (c *StackCollection) UpdateStack(stackName string, action string, description string, template []byte, parameters map[string]string) error {
 	i := &Stack{StackName: &stackName}
 	changesetName, err := c.doCreateChangesetRequest(stackName, action, description, template, parameters, true)
